@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Task Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* --- NEW BACKGROUND STYLES --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Particles Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(0, 255, 136, 0.5);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Glow Effect */
+        .glow-effect {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.3) 0%, rgba(255, 107, 107, 0.2) 50%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+        /* --- END OF NEW BACKGROUND STYLES --- */
+
+
+        .container {
+            position: relative;
+            /* z-index updated to 2 to be on top of the background effects */
+            z-index: 2;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header h1 {
+            font-size: 3em;
+            color: white;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5); /* Changed shadow color to match theme */
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2em;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 25px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05); /* Made slightly more transparent */
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.05);
+            background: rgba(0, 255, 136, 0.1); /* Changed hover color to green tint */
+            box-shadow: 0 15px 45px rgba(0, 255, 136, 0.2);
+        }
+
+        .icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .icon {
+            transform: rotateY(360deg);
+            background: rgba(0, 255, 136, 0.2);
+        }
+
+        .card-title {
+            color: white;
+            font-size: 1em;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .study-icon {
+            position: relative;
+        }
+
+        .study-icon::before {
+            content: '📚';
+            font-size: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 15px;
+            }
+
+            .card {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    <div class="glow-effect"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>⚡ Hub</h1>
+            <p>Your gateway to productivity</p>
+        </div>
+        
+        <div class="grid">
+            <a href="https://chat.openai.com" class="card" target="_blank">
+                <div class="icon">🤖</div>
+                <div class="card-title">ChatGPT</div>
+            </a>
+
+            <a href="https://gemini.google.com" class="card" target="_blank">
+                <div class="icon">✨</div>
+                <div class="card-title">Gemini</div>
+            </a>
+
+            <a href="https://mail.google.com" class="card" target="_blank">
+                <div class="icon">📧</div>
+                <div class="card-title">Gmail</div>
+            </a>
+
+            <a href="https://linkedin.com" class="card" target="_blank">
+                <div class="icon">💼</div>
+                <div class="card-title">LinkedIn</div>
+            </a>
+
+            <a href="https://youtube.com" class="card" target="_blank">
+                <div class="icon">📺</div>
+                <div class="card-title">YouTube</div>
+            </a>
+
+            <a href="https://claude.ai" class="card" target="_blank">
+                <div class="icon">🧠</div>
+                <div class="card-title">Claude AI</div>
+            </a>
+
+            <a href="#study" class="card" onclick="event.preventDefault(); alert('Add your study resources here!');">
+                <div class="icon study-icon"></div>
+                <div class="card-title">Study</div>
+            </a>
+
+            <a href="https://web.whatsapp.com" class="card" target="_blank">
+                <div class="icon">💬</div>
+                <div class="card-title">WhatsApp</div>
+            </a>
+
+            <a href="https://github.com" class="card" target="_blank">
+                <div class="icon">🐙</div>
+                <div class="card-title">GitHub</div>
+            </a>
+
+            <a href="https://supabase.com" class="card" target="_blank">
+                <div class="icon">⚡</div>
+                <div class="card-title">Supabase</div>
+            </a>
+
+            <a href="https://notebooklm.google.com" class="card" target="_blank">
+                <div class="icon">📓</div>
+                <div class="card-title">NotebookLM</div>
+            </a>
+
+            <a href="https://sololearn.com" class="card" target="_blank">
+                <div class="icon">🎓</div>
+                <div class="card-title">SoloLearn</div>
+            </a>
+
+            <a href="https://lovable.dev" class="card" target="_blank">
+                <div class="icon">💖</div>
+                <div class="card-title">Lovable</div>
+            </a>
+
+            <a href="https://coursera.org" class="card" target="_blank">
+                <div class="icon">🎯</div>
+                <div class="card-title">Coursera</div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Particle System
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Glow Effect Mouse Tracking
+        document.addEventListener('mousemove', (e) => {
+            const glowEffect = document.querySelector('.glow-effect');
+            if (glowEffect) {
+                const x = e.clientX;
+                const y = e.clientY;
+                
+                glowEffect.style.left = (x - 300) + 'px';
+                glowEffect.style.top = (y - 300) + 'px';
+            }
+        });
+
+        // Initialize when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+        });
+    </script>
+</body>
+</html>
