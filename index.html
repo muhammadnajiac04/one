@@ -50,22 +50,7 @@
             50% { transform: translateY(-20px) rotate(180deg); }
         }
 
-        /* Glow Effect */
-        .glow-effect {
-            position: fixed;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(0, 255, 136, 0.3) 0%, rgba(255, 107, 107, 0.2) 50%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 1;
-            animation: pulse 4s ease-in-out infinite;
-        }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.1); opacity: 1; }
-        }
         /* --- END OF NEW BACKGROUND STYLES --- */
 
 
@@ -238,7 +223,7 @@
                 <div class="card-title">Claude AI</div>
             </a>
 
-            <a href="https://techworldthink.github.io/MCA/" class="card" onclick="event.preventDefault(); alert('Add your study resources here!');">
+            <a href="https://techworldthink.github.io/MCA/" class="card" target="_blank">
                 <div class="icon study-icon"></div>
                 <div class="card-title">Study</div>
             </a>
@@ -277,8 +262,8 @@
                 <div class="icon">🎯</div>
                 <div class="card-title">Coursera</div>
             </a>
-                        <a href="https://app.netlify.com/teams/muhammadnaji2004/projects" class="card" target="_blank">
-               <i class="fi fi-rr-globe"></i>
+            <a href="https://app.netlify.com/teams/muhammadnaji2004/projects" class="card" target="_blank">
+
                 <div class="card-title">Netlify</div>
             </a>
         </div>
@@ -320,4 +305,3 @@
     </script>
 </body>
 </html>
-
