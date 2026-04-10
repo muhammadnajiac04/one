@@ -55,5 +55,3 @@ Includes shortcuts to:
 | Architecture | Single File |
 
 ---
-
-## 📁 Project Structure
